@@ -2,18 +2,28 @@
 
 A simple Python TK GUI which allows you to superimpose two OpenCV camera images (live and frozen) to aid surface mount component placement.
 
-Works best under Linux as OpenCV does not work correctly with some Windows drivers. See below for the installation instructions.
+![USB_Microscope.JPG](https://github.com/PaulZC/SMT_Component_Placer/blob/master/img/USB_Microscope.JPG)
+
+![GUI_1.JPG](https://github.com/PaulZC/SMT_Component_Placer/blob/master/img/GUI_1.JPG)
+
+Works best under Linux as some Windows drivers do not work correctly with OpenCV. See below for the installation instructions.
 
 Connect a USB microscope and then run [SMT_Component_Placer.py](https://github.com/PaulZC/SMT_Component_Placer/blob/master/SMT_Component_Placer.py)
 
-Clicking anywhere in the image box will store the frozen image. The slider can then be used to superimpose the frozen and live images.
+Left-clicking anywhere in the image box will store the frozen image. The slider can then be used to superimpose the frozen and live images.
 
 Freezing an image of the pads on your circuit board and then superimposing a live image of the component as you place it
 allows you to line up the component legs with the circuit board pads more easily.
 
-![USB_Microscope.JPG](https://github.com/PaulZC/SMT_Component_Placer/blob/master/img/USB_Microscope.JPG)
+Right-clicking anywhere in the image box will save the displayed image in .png format.
 
-![GUI_1.JPG](https://github.com/PaulZC/SMT_Component_Placer/blob/master/img/GUI_1.JPG)
+![Placer_1.JPG](https://github.com/PaulZC/SMT_Component_Placer/blob/master/img/Placer_1.JPG)
+![Placer_2.JPG](https://github.com/PaulZC/SMT_Component_Placer/blob/master/img/Placer_2.JPG)
+![Placer_3.JPG](https://github.com/PaulZC/SMT_Component_Placer/blob/master/img/Placer_3.JPG)
+
+![Placer_4.JPG](https://github.com/PaulZC/SMT_Component_Placer/blob/master/img/Placer_4.JPG)
+![Placer_5.JPG](https://github.com/PaulZC/SMT_Component_Placer/blob/master/img/Placer_5.JPG)
+![Placer_6.JPG](https://github.com/PaulZC/SMT_Component_Placer/blob/master/img/Placer_6.JPG)
 
 ## Installation
 

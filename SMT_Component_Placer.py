@@ -66,12 +66,15 @@ class Placer(object):
         #Video frame
         image = Image.fromarray(self.frameL)
         photo = ImageTk.PhotoImage(image)
-        self.image = photo # Prevent garbage collection
+        self.photo = photo # Prevent garbage collection
         self.label = tk.Label(self.imageFrame,image=photo)
         self.label.pack(fill=tk.BOTH)
 
         #Bind left mouse button click event - freeze image
         self.label.bind("<Button-1>",self.left_click)
+
+        #Bind right mouse button click event - save image
+        self.label.bind("<Button-3>",self.right_click)
 
         # Timer
         self.window.after(100,self.timer) # First timer event after 0.1 secs
@@ -96,11 +99,14 @@ class Placer(object):
             self.frameL[:,self.crossx] = [255,255,255]
             # Add live and frozen images
             added = cv2.addWeighted(self.frameF,(1.-self.slider.get()),self.frameL,self.slider.get(),0) # Add images
+            # Store a copy of the array in case we want to save it
+            self.store = added.copy()
             # Update label using added image
             image = Image.fromarray(added)
             photo = ImageTk.PhotoImage(image)
             self.label.configure(image=photo)
-            self.image = photo # Prevent garbage collection
+            self.photo = photo # Prevent garbage collection
+            
         self.window.after(100, self.timer) 
 
     def left_click(self, event):
@@ -110,6 +116,16 @@ class Placer(object):
             if self.swap_red_blue: self.frameF = self.swap_rb_chans(self.frameF) # Swap red and blue
             self.frameF[self.crossy,:] = [255,255,255] # Add crosshair
             self.frameF[:,self.crossx] = [255,255,255]
+
+    def right_click(self, event):
+        ''' Right mouse click - save image '''
+        if(self.cam0.isOpened):
+            tn = time.localtime(time.time())
+            date_str = str(tn[0])+str(tn[1]).zfill(2)+str(tn[2]).zfill(2)
+            time_str = str(tn[3]).zfill(2)+str(tn[4]).zfill(2)+str(tn[5]).zfill(2)
+            filename = 'Grab_' + date_str + '_' + time_str + '.png'
+            cv2.imwrite(filename, self.swap_rb_chans(self.store))
+            print 'Image saved as',filename
 
     def close(self):
         time.sleep(2)
